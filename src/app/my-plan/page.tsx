@@ -2,10 +2,11 @@
 import React, { useState,useContext } from 'react';
 import { Oswald } from 'next/font/google';
 import SavedGym from './SavedGym';
-import { MoveDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { Gymcontext } from '@/Context/WorkoutContext';
 import WorkoutCard from '@/components/Homepage/WorkoutCard';
 import { WorkoutType } from '@/types/Types';
+import Link from 'next/link';
 const oswald = Oswald({
   subsets: ["latin"]
 });
@@ -26,7 +27,27 @@ const handleSelect = (option: string) => {
   setOpen(false);
 };
 const {Saved,Plan}=useContext(Gymcontext)
-const data=Active==="saved"?Saved:Plan
+const rawdata=Active==="saved"?Saved:Plan
+const data=selected==="Duration"?rawdata.sort((a:WorkoutType,b:WorkoutType)=>(a.duration-b.duration)):
+                selected==="Calories"?rawdata.sort((a:WorkoutType,b:WorkoutType)=>(a.caloriesBurned-b.caloriesBurned)):rawdata.sort((a:WorkoutType,b:WorkoutType)=>(a.rating-b.rating))
+
+function calcCal(num: WorkoutType[]) {
+  let count = 0;
+  for (let i = 0; i < num.length; i++) {
+    count = count + num[i].caloriesBurned;
+  }
+  return count;
+}
+function calcMin(num: WorkoutType[]) {
+  let count = 0;
+  for (let i = 0; i < num.length; i++) {
+    count = count + num[i].duration;
+  }
+  return count;
+}
+function calcEx(num: WorkoutType[]) {
+  return num.length;
+}
     return (
         <div className='bg-black p-[48px] flex flex-col gap-9'>
             <div className='flex flex-col gap-4'>
@@ -36,12 +57,15 @@ const data=Active==="saved"?Saved:Plan
             <div className='flex justify-around text-white bg-slate-900 p-[24px] rounded-2xl'>
                 <div >
                     <p className='text-[12px] font-[400] text-text-gry'>Exercise</p>
+                    <p className={`${oswald.className} text-[36px] font-[700] text-text-grn`}>{calcEx(data)}</p>
                 </div>
                 <div>
                     <p className='text-[12px] font-[400] text-text-gry'>Minute</p>
+                    <p className={`${oswald.className} text-[36px] font-[700]`}>{calcMin(data)}</p>
                 </div>
                 <div>
                     <p className='text-[12px] font-[400] text-text-gry'>Calories</p>
+                    <p className={`${oswald.className} text-[36px] font-[700]`}>{calcCal(data)}</p>
                 </div>
             </div>
             <div className='p-[4px] text-text-gry flex justify-between'>
@@ -56,7 +80,7 @@ const data=Active==="saved"?Saved:Plan
   <div
     className="rounded-lg bg-slate-700 px-4 py-2 text-white flex gap-2 items-center cursor-pointer" onClick={() => setOpen(!open)}>
     <button>{selected}</button>
-    <MoveDown className="h-3.5 w-3.5 text-white" />
+    <ChevronDown className="h-3.5 w-3.5 text-white" />
   </div>
 
   {open && (
@@ -78,12 +102,20 @@ const data=Active==="saved"?Saved:Plan
                 </div>
             </div>
             <div className="flex flex-col gap-6">
-        {data.map((workout:WorkoutType) => (
+        {
+            data.length===0? <div className='bg-slate-900 rounded-2xl flex flex-col gap-6 justify-center items-center py-[98px]'>
+               <p className={`${oswald.className} text-[20px] font-[700] text-white`}>NOTHING HERE YET</p>
+               <p className='text-[12px] font-[400] text-text-gry'>Browse the library and add a lift to get today moving.</p>
+               <Link href="/#Library" className='bg-text-grn px-3 py-2 rounded-full font-semibold hover:-translate-y-1'>Go to Workouts</Link>
+            </div>
+            :
+            data.map((workout:WorkoutType) => (
           <SavedGym
             key={workout.id}
             workout={workout}
           />
-        ))}
+        ))
+        }
       </div>
             <div></div>
         </div>

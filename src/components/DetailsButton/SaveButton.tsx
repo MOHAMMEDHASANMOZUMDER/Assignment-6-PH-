@@ -11,7 +11,6 @@ const SaveButton = ({workout}:{workout:WorkoutType}) => {
     const {addWorkout}=useContext(Gymcontext)
     const handlePlan = () => {
      addWorkout(workout, "saved")
-        toast.success("Plan saved successfully!")
     }
     return (
         <div>

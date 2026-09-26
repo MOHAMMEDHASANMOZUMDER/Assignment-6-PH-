@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
    <html lang="en" data-theme="white">
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-black">
       <WorkoutContext>
          <Navbar />
 

@@ -1,13 +1,14 @@
 "use client";
-
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Gymcontext } from "@/Context/WorkoutContext";
 
 const Navbar = () => {
     const path = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
+    const {Saved,Plan}=useContext(Gymcontext)
 
     return (
         <nav className="h-[60px] sm:h-[65px] md:h-[70px] relative w-full px-4 sm:px-6 md:px-16 lg:px-24 xl:px-32 flex items-center justify-between z-20 bg-black text-white shadow-[0px_4px_25px_0px_#0000000D] transition-all">
@@ -29,8 +30,8 @@ const Navbar = () => {
                 </Link>
             </ul>
             <div className="hidden sm:flex gap-3 md:gap-4 text-[11px] md:text-[12px] font-[500]">
-                <p>Plan</p>
-                <p>Saved</p>
+                  <p className="flex gap-3 items-center">Plan <span className="inline-flex bg-text-grn rounded-full w-6 h-6 p-2 text-black items-center font-bold">{Plan.length}</span></p>
+                    <p className="flex gap-3 items-center">Saved <span className="inline-flex w-6 h-6 items-center text-text-gry border-text-gry border-[1px] rounded-full p-1.5 font-bold">{Saved.length}</span></p>
             </div>
             <button onClick={() => setMenuOpen(!menuOpen)} className="menu-btn inline-block md:hidden active:scale-90 transition">≣
             </button>
@@ -45,8 +46,8 @@ const Navbar = () => {
                     </Link>
                 </ul>
                 <div className="flex gap-4 text-[12px] font-[500] mt-4">
-                    <p>Plan</p>
-                    <p>Saved</p>
+                    <p className="flex gap-3 items-center">Plan <span className="inline-flex bg-text-grn rounded-full w-6 h-6 p-2 text-black items-center font-bold">{Plan.length}</span></p>
+                    <p className="flex gap-3 items-center">Saved <span  className="inline-flex w-6 h-6 items-center text-text-gry border-text-gry border-[1px] rounded-full p-1.5 font-bold">{Saved.length}</span></p>
                 </div>
             </div>
         </nav>

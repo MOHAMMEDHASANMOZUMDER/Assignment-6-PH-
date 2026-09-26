@@ -9,7 +9,6 @@ const PlanButton = ({workout}:{workout:WorkerType}) => {
         const handlePlan = () => {
             console.log("Clicked!!!!")
             addWorkout(workout, "plan")
-            toast.info("Planned successfully!")
         }
     return (
         <div>
