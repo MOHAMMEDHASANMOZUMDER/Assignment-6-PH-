@@ -5,12 +5,10 @@ import { Square, BookBookmark } from 'lucide-react';
 import { Gymcontext } from '@/Context/WorkoutContext';
 import { toast } from 'react-toastify';
 const PlanButton = ({workout}:{workout:WorkerType}) => {
-    const PlanProvider=useContext(Gymcontext)
-        const {Saved, SetSaved}=PlanProvider;
-        console.log(PlanProvider)
+    const {addWorkout}=useContext(Gymcontext)
         const handlePlan = () => {
             console.log("Clicked!!!!")
-            SetSaved([...Saved, workout])
+            addWorkout(workout, "plan")
             toast.info("Planned successfully!")
         }
     return (

@@ -8,12 +8,9 @@ import { toast } from 'react-toastify';
 
 
 const SaveButton = ({workout}:{workout:WorkoutType}) => {
-    const GymProvider=useContext(Gymcontext)
-    const {Saved, SetSaved}=GymProvider;
-    console.log(GymProvider)
+    const {addWorkout}=useContext(Gymcontext)
     const handlePlan = () => {
-        console.log("Clicked!!!!")
-        SetSaved([...Saved, workout])
+     addWorkout(workout, "saved")
         toast.success("Plan saved successfully!")
     }
     return (
