@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import WorkoutCard from "./WorkoutCard";
+import WorkoutCard from "../../components/Homepage/WorkoutCard";
 import { WorkoutType } from "@/types/Types";
 
 const LibraryPage = async () => {

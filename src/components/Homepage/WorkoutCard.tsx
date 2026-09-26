@@ -10,7 +10,7 @@ type Props = {
 const WorkoutCard = ({ workout }: Props) => {
   return (
     <Link
-      href={`/library/${workout.id}`}
+      href={`/Library/${workout.id}`}
       className="group block overflow-hidden rounded-2xl border border-slate-800 bg-[#121824] font-sans text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-slate-700 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-[#ccff00]"
     >
       <div className="relative h-44 w-full overflow-hidden">

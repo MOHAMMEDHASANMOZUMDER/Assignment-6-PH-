@@ -4,3 +4,15 @@
   --color-text-grn: #c2f800FF;
   --color-text-gry:#9ca3af;
 }
+
+.th{
+  font-size: 12px;
+  font-weight: 700;
+  color: #9ca3af;
+}
+.td{
+  color: #e5e7ebFF;
+  font-size: 14px;
+  font-weight: 500;
+
+}
