@@ -24,7 +24,7 @@ const Navbar = () => {
          <Link href="/" className={`text-[11px] lg:text-[12px] font-[500] ${path === "/" ? "text-text-grn bg-[#364727] rounded-2xl p-2 lg:p-3" : "text-text-gry"}`}>
                     Workouts
                 </Link>
-                <Link href="/myplan" className={`text-[11px] lg:text-[12px] font-[500] ${path === "/myplan" ? "text-text-grn bg-[#364727] rounded-2xl p-2 lg:p-3" : "text-text-gry"}`}>
+                <Link href="/my-plan" className={`text-[11px] lg:text-[12px] font-[500] ${path === "/my-plan" ? "text-text-grn bg-[#364727] rounded-2xl p-2 lg:p-3" : "text-text-gry"}`}>
                     My Plan
                 </Link>
             </ul>
@@ -40,7 +40,7 @@ const Navbar = () => {
                     <Link href="/" onClick={() => setMenuOpen(false)} className={`text-[12px] font-[500] ${path === "/" ? "text-[#c2f800FF] bg-[#364727] rounded-2xl p-3" : "text-[#9ca3afFF]"}`}>
                         Workouts
                     </Link>
-                    <Link href="/myplan" onClick={() => setMenuOpen(false)} className={`text-[12px] font-[500] ${path === "/myplan" ? "text-[#c2f800FF] bg-[#364727] rounded-2xl p-3" : "text-[#9ca3afFF]"}`}>
+                    <Link href="/my-plan" onClick={() => setMenuOpen(false)} className={`text-[12px] font-[500] ${path === "/my-plan" ? "text-[#c2f800FF] bg-[#364727] rounded-2xl p-3" : "text-[#9ca3afFF]"}`}>
                         My Plan
                     </Link>
                 </ul>

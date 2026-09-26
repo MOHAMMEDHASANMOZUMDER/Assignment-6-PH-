@@ -3,7 +3,8 @@ import React from 'react';
 import { Oswald } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Square, BookBookmark } from 'lucide-react';
+import SaveButton from '@/components/DetailsButton/SaveButton';
+import PlanButton from '@/components/DetailsButton/PlanButton';
 const oswald = Oswald({
   subsets: ["latin"]
 });
@@ -17,7 +18,7 @@ type Props = {
 
 const LibraryDetails = async({params}:Props) => {
  const {id}=await params;
-    const res= await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`)
+    const res= await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`)
     const data= await res.json();
     return (
       <div className='bg-black flex flex-col md:flex-row gap-6 sm:p-6 p-12 md:p-8'>
@@ -127,17 +128,10 @@ from a stable bench.</p>
   ))}
   </ol>
 </div>
-<div className='text-[14px] font-[600] flex gap-4'>
-  <div  className='bg-text-grn p-[12px] rounded-2xl flex items-center gap-2'><Square className="h-3.5 w-3.5" />
-  <Link href=""> Add to today&apos;s plan</Link>
-  </div>
-  <div className='text-text-gry p-[12px] rounded-2xl flex items-center gap-2 border-[1px] border-text-gry'>
-  <BookBookmark className='h-3.5 w-3.5'/>
-    <Link href="" >Save for later</Link>
-  </div>
-</div>
-
-        
+<div className='text-[14px] font-[600] flex gap-4 '>
+  <PlanButton workout={data}></PlanButton>
+  <SaveButton workout={data}></SaveButton>
+</div>       
            </div>
         </div>  
     );
