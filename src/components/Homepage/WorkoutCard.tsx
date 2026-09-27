@@ -9,17 +9,14 @@ type Props = {
 
 const WorkoutCard = ({ workout }: Props) => {
   return (
-    <Link
-      href={`/Library/${workout.id}`}
-      className="group block overflow-hidden rounded-2xl border border-slate-800 bg-[#121824] font-sans text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-slate-700 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-[#ccff00]"
-    >
+    <Link href={`/Library/${workout.id}`}
+      className="group block overflow-hidden rounded-2xl border border-slate-800 bg-[#121824] font-sans text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-slate-700 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-[#ccff00]">
       <div className="relative h-44 w-full overflow-hidden">
         <Image
           src={workout.image}
           alt={workout.name}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+          className="object-cover transition-transform duration-300 group-hover:scale-105"/>
         
 </div>
       <div className="p-4 flex flex-col gap-4">

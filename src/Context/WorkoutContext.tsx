@@ -11,20 +11,23 @@ const WorkoutContext = ({children}:{children:ReactNode}) => {
     const[Load,SetLoad]=useState(false)
     const [Saved, SetSaved] = useState<WorkoutType[]>([]);
         useEffect(() => {
-    const data = localStorage.getItem("savedWorkouts");
-
-    if (data) {
-      SetSaved(JSON.parse(data));
-    }
-
+    const savedPlan = localStorage.getItem("plannedWorkouts");
+  const savedWorkouts = localStorage.getItem("savedWorkouts");
+  if (savedPlan) {
+    SetPlan(JSON.parse(savedPlan));
+  }
+  if (savedWorkouts) {
+    SetSaved(JSON.parse(savedWorkouts));
+  }
     SetLoad(true);
   }, []);
 
   useEffect(() => {
     if (Load) {
-      localStorage.setItem("savedWorkouts", JSON.stringify(Saved));
+      localStorage.setItem("plannedWorkouts", JSON.stringify(Plan));
+    localStorage.setItem("savedWorkouts", JSON.stringify(Saved));
     }
-  }, [Saved, Load]);
+  }, [Plan,Saved, Load]);
 const addWorkout = (workout: WorkoutType, type: string) => {
     if (type === "plan"){
         if(Plan.some(item=>item.id===workout.id)){
@@ -47,6 +50,14 @@ const addWorkout = (workout: WorkoutType, type: string) => {
       }
     }
   };
+  const removeWorkout = (id: number, type: string) => {
+  if (type === "saved") {
+    SetSaved(Saved.filter(workout=>workout.id!==id));
+  }
+  if (type === "plan") {
+    SetPlan(Plan.filter(workout=>workout.id!==id));
+  }
+};
 
   const SharedData = {
     Plan,
@@ -54,6 +65,7 @@ const addWorkout = (workout: WorkoutType, type: string) => {
     Saved,
     SetSaved,
     addWorkout,
+    removeWorkout
   };
 
     

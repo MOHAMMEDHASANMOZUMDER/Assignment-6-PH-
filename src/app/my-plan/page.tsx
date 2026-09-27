@@ -28,8 +28,8 @@ const handleSelect = (option: string) => {
 };
 const {Saved,Plan}=useContext(Gymcontext)
 const rawdata=Active==="saved"?Saved:Plan
-const data=selected==="Duration"?rawdata.sort((a:WorkoutType,b:WorkoutType)=>(a.duration-b.duration)):
-                selected==="Calories"?rawdata.sort((a:WorkoutType,b:WorkoutType)=>(a.caloriesBurned-b.caloriesBurned)):rawdata.sort((a:WorkoutType,b:WorkoutType)=>(a.rating-b.rating))
+const data=selected==="Duration"?[...rawdata].sort((a:WorkoutType,b:WorkoutType)=>(a.duration-b.duration)):
+                selected==="Calories"?[...rawdata].sort((a:WorkoutType,b:WorkoutType)=>(a.caloriesBurned-b.caloriesBurned)):[...rawdata].sort((a:WorkoutType,b:WorkoutType)=>(a.rating-b.rating))
 
 function calcCal(num: WorkoutType[]) {
   let count = 0;
@@ -82,7 +82,6 @@ function calcEx(num: WorkoutType[]) {
     <button>{selected}</button>
     <ChevronDown className="h-3.5 w-3.5 text-white" />
   </div>
-
   {open && (
     <div className="absolute mt-2 w-full rounded-lg bg-slate-800 shadow-lg z-10">
         <button onClick={() => handleSelect("Duration")} className="block w-full px-4 py-2 text-left text-text-gry hover:bg-black">
@@ -98,8 +97,7 @@ function calcEx(num: WorkoutType[]) {
     </div>
   )}
 </div>
-                    
-                </div>
+           </div>
             </div>
             <div className="flex flex-col gap-6">
         {
@@ -110,14 +108,10 @@ function calcEx(num: WorkoutType[]) {
             </div>
             :
             data.map((workout:WorkoutType) => (
-          <SavedGym
-            key={workout.id}
-            workout={workout}
-          />
+          <SavedGym key={workout.id} workout={workout} type={Active}/>
         ))
         }
       </div>
-            <div></div>
         </div>
     );
 };

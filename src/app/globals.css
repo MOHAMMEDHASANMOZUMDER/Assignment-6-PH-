@@ -1,5 +1,6 @@
 @import "tailwindcss";
-
+@plugin "daisyui";
+@plugin "daisyui";
 @theme {
   --color-text-grn: #c2f800FF;
   --color-text-gry:#9ca3af;
