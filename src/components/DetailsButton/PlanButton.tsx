@@ -1,10 +1,11 @@
 "use client"
-import {React,useContext} from 'react';
+import {useContext} from 'react';
 import Link from 'next/link';
 import { Square, BookBookmark } from 'lucide-react';
 import { Gymcontext } from '@/Context/WorkoutContext';
 import toast from 'react-hot-toast';
-const PlanButton = ({workout}:{workout:WorkerType}) => {
+import { WorkoutType } from '@/types/Types';
+const PlanButton = ({workout}:{workout:WorkoutType}) => {
     const {addWorkout,Plan}=useContext(Gymcontext)
         const handlePlan = () => {
             if(Plan.length<5)

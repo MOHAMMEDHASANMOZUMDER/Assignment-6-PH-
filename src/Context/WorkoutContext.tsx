@@ -1,9 +1,16 @@
 "use client";
 import { WorkoutType } from '@/types/Types';
-import React from 'react';
 import { ReactNode, useState, createContext, useEffect } from 'react';
 import toast from 'react-hot-toast';
-export const Gymcontext=createContext({})
+
+type ContextType = {
+  Plan: WorkoutType[];
+  Saved: WorkoutType[];
+  addWorkout: (workout: WorkoutType, type: string) => void;
+  removeWorkout: (id: number, type: string) => void;
+};
+
+export const Gymcontext=createContext<ContextType>({} as ContextType)
 
 
 const WorkoutContext = ({children}:{children:ReactNode}) => {
@@ -91,18 +98,14 @@ const addWorkout = (workout: WorkoutType, type: string) => {
   }
 };
 
-  const SharedData = {
-    Plan,
-    SetPlan,
-    Saved,
-    SetSaved,
-    addWorkout,
-    removeWorkout
-  };
-
     
     return (
-       <Gymcontext.Provider value={SharedData}>{children}</Gymcontext.Provider>
+       <Gymcontext.Provider value={{
+        Plan,
+    Saved,
+    addWorkout,
+    removeWorkout,
+  }}>{children}</Gymcontext.Provider>
        );
 };
 
