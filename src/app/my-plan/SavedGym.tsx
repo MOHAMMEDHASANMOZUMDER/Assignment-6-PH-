@@ -2,15 +2,36 @@
 import { Gymcontext } from '@/Context/WorkoutContext';
 import React, { useContext } from 'react';
 import Image from 'next/image';
-import { Circle,Flame,Star } from 'lucide-react';
+import { Circle,Flame,Star,Delete } from 'lucide-react';
 import { WorkoutType } from '@/types/Types';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import Link from 'next/link';
 const SavedGym = ({workout, type}:{workout:WorkoutType,type:string})=>{
     const {removeWorkout}=useContext(Gymcontext)
    const handleDone=()=>{
     removeWorkout(workout.id,"plan")
-    toast.success("Removed Successfully!")
+     toast.success("Workout done successfully!", {
+  style: {
+    background: "#1a1a1a",
+    color: "#84cc16",
+    border: "1px solid #84cc16",
+    borderRadius: "10px",
+    fontWeight: "600",
+  },
+});
+    }
+    const handleRemove=()=>{
+      removeWorkout(workout.id,"plan")
+    toast('Workout Removed',
+  {
+    icon: '⚠️',
+    style: {
+      background: "#292524",
+    color: "#fbbf24",
+    border: "1px solid #f59e0b",
+    borderRadius: "10px",
+    },
+  });
     }
     if(type==="planned"){
       return(
@@ -41,6 +62,7 @@ const SavedGym = ({workout, type}:{workout:WorkoutType,type:string})=>{
   <div className="flex items-center gap-2.5 w-full md:w-auto justify-end flex-shrink-0">
     <Link href={`/Library/${workout.id}`} className="px-4 py-2 rounded-full text-xs md:text-sm font-bold text-white border border-[#2e3545] hover:bg-white/5 hover:border-gray-500 transition-colors hover:-translate-y-1" >View Details</Link>
     <button className="px-4 py-2 rounded-full text-xs md:text-sm font-bold text-black bg-[#ccff00] hover:bg-[#b3e600] active:scale-95 transition-all shadow-md hover:-translate-y-1 hover:cursor-pointer" onClick={handleDone}>Mark as Done</button>
+    <button onClick={handleRemove} className='text-white p-2 hover:cursor-pointer hover:-translate-y-1'> <Delete className='w-4 h-4'/> </button>
   </div>
 <div/>
         </div>

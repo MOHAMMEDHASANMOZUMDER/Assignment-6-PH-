@@ -2,7 +2,7 @@
 import { WorkoutType } from '@/types/Types';
 import React from 'react';
 import { ReactNode, useState, createContext, useEffect } from 'react';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 export const Gymcontext=createContext({})
 
 
@@ -31,22 +31,54 @@ const WorkoutContext = ({children}:{children:ReactNode}) => {
 const addWorkout = (workout: WorkoutType, type: string) => {
     if (type === "plan"){
         if(Plan.some(item=>item.id===workout.id)){
-            toast.error("Data already exists in plans!!")
+            toast.error("Plan already exists!", {
+  style: {
+    background: "#1a1a1a",
+    color: "#ef4444",
+    border: "1px solid #ef4444",
+    borderRadius: "10px",
+    fontWeight: "600",
+  },
+});
         }
         else{
             SetPlan([...Plan, workout]);
-      toast.success("Planned successfully!")
+     toast.success("Workout added successfully!", {
+  style: {
+    background: "#1a1a1a",
+    color: "#84cc16",
+    border: "1px solid #84cc16",
+    borderRadius: "10px",
+    fontWeight: "600",
+  },
+});
         }
       
     }
 
     if (type === "saved") {
       if(Saved.some(item => item.id === workout.id)){
-        toast.error("Data already exists in saved ones!!")
+         toast.error("Plan already exists in saved ones!", {
+  style: {
+    background: "#1a1a1a",
+    color: "#ef4444",
+    border: "1px solid #ef4444",
+    borderRadius: "10px",
+    fontWeight: "600",
+  },
+});
       }
       else{
         SetSaved([...Saved, workout]);
-        toast.success("Plan saved successfully!")
+          toast.success("Workout saved successfully!", {
+  style: {
+    background: "#1a1a1a",
+    color: "#84cc16",
+    border: "1px solid #84cc16",
+    borderRadius: "10px",
+    fontWeight: "600",
+  },
+});
       }
     }
   };
